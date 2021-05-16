@@ -6,19 +6,25 @@ import { configureClient } from "./api/client";
 import storage from "./utils/storage";
 import "./index.css";
 import App from "./components/app";
-import { Provider } from 'react-redux';
-import { store } from "./store/store";
+import { Provider } from "react-redux";
+import { configureStore } from "./store/store";
 
 const accessToken = storage.get("auth");
 configureClient({ accessToken });
 
+const store = configureStore({
+  preloadedState: {
+    auth: !!accessToken,
+  },
+});
+
 ReactDOM.render(
   <>
-    <Router>
-      <Provider store={ store }>
-        <App isInitiallyLogged={!!accessToken} />
-      </Provider>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
   </>,
   document.getElementById("root")
 );

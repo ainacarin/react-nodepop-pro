@@ -5,6 +5,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 const reducers = combineReducers({
     auth: authReducer
-})
+});
 
-export const store = createStore(reducers, composeWithDevTools());
+export const configureStore = ({ preloadedState }) => {
+    return createStore(reducers, preloadedState, composeWithDevTools())
+};

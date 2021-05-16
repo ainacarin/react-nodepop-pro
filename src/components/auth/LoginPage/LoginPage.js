@@ -1,18 +1,23 @@
 import React from 'react';
 import T from 'prop-types';
 
-import { useAuthContext } from '../context';
 import usePromise from '../../../hooks/usePromise';
 import { login } from '../../../api/auth';
 import LoginForm from './LoginForm';
+import { useDispatch } from 'react-redux';
+import { authLogin } from '../../../actions/auth';
 
 function LoginPage({ location, history }) {
-  const { handleLogin } = useAuthContext();
   const { isPending: isLoading, error, execute, resetError } = usePromise();
+  const dispatch = useDispatch();
 
   const handleSubmit = credentials => {
     execute(login(credentials))
-      .then(handleLogin)
+      .then(() => {
+        // modify state auth
+        dispatch( authLogin() )
+      }
+      )
       .then(() => {
         const { from } = location.state || { from: { pathname: '/' } };
         history.replace(from);
