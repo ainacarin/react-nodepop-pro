@@ -5,7 +5,7 @@ import usePromise from '../../../hooks/usePromise';
 import { login } from '../../../api/auth';
 import LoginForm from './LoginForm';
 import { useDispatch } from 'react-redux';
-import { authLogin } from '../../../actions/auth';
+import { authLogin } from '../../../store/actions/auth';
 
 function LoginPage({ location, history }) {
   const { isPending: isLoading, error, execute, resetError } = usePromise();

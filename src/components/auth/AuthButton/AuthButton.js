@@ -4,8 +4,8 @@ import T from 'prop-types';
 import { ConfirmationButton } from '../../shared';
 import { logout } from '../../../api/auth';
 import { connect } from 'react-redux';
-import { authLogout } from '../../../actions/auth';
-import { getIsLogged } from '../../../selectors/auth';
+import { authLogout } from '../../../store/actions/auth';
+import { getIsLogged } from '../../../store/selectors/auth';
 
 const AuthButton = ({ isLogged, onLogout:handleLogout }) => {
   
