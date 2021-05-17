@@ -9,6 +9,8 @@ import storage from '../../../utils/storage';
 import { getAdverts } from '../../../api/adverts';
 import { defaultFilters, filterAdverts } from './filters';
 import usePromise from '../../../hooks/usePromise';
+import { useDispatch } from 'react-redux';
+import { advertsLoaded } from '../../../store/actions/adverts';
 
 const getFilters = () => storage.get('filters') || defaultFilters;
 const saveFilters = filters => storage.set('filters', filters);
@@ -19,8 +21,11 @@ function AdvertsPage() {
   );
   const [filters, setFilters] = React.useState(getFilters);
 
+    const dispatch = useDispatch();
+
   React.useEffect(() => {
-    execute(getAdverts());
+    execute(getAdverts())
+    .then(adverts => dispatch(advertsLoaded(adverts)));
   }, []);
 
   React.useEffect(() => {
