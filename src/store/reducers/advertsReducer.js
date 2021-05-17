@@ -12,9 +12,9 @@
  
      switch (action.type) {
          case types.adverts_loaded:
-             return {
+             return [
                  ...action.payload
-             }
+             ]
 
          default:
              return state;
