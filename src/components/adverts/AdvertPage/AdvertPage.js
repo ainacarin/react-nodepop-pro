@@ -5,17 +5,24 @@ import Layout from '../../layout';
 import AdvertDetail from './AdvertDetail';
 import { getAdvert, deleteAdvert } from '../../../api/adverts';
 import usePromise from '../../../hooks/usePromise';
+import { useSelector } from 'react-redux';
+import { getAdvertState } from '../../../store/selectors/adverts';
 
 function AdvertPage() {
   const { advertId } = useParams();
   const history = useHistory();
-  const { isPending: isLoading, error, execute, data: advert } = usePromise(
+  // const { isPending: isLoading, error, execute, data: advert } = usePromise(
+  const { isPending: isLoading, error, execute } = usePromise(
+
     null
   );
+  
+  const advert = useSelector(getAdvertState(advertId));
 
-  React.useEffect(() => {
-    execute(getAdvert(advertId));
-  }, [advertId]);
+  // console.log(advertSelector);
+  // React.useEffect(() => {
+  //   execute(getAdvert(advertId));
+  // }, [advertId]);
 
   const handleDelete = () => {
     execute(deleteAdvert(advertId)).then(() => history.push('/'));
@@ -29,6 +36,9 @@ function AdvertPage() {
     return <Redirect to="/404" />;
   }
 
+  // console.log('advert page')
+
+  // console.log(advert)
   return (
     <Layout>
       {advert && <AdvertDetail {...advert} onDelete={handleDelete} />}
