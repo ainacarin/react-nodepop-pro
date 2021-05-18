@@ -12,8 +12,8 @@ const reducers = combineReducers({
     ui: uiReducer
 });
 
-const middlewares = [thunk];
 
-export const configureStore = ({ preloadedState }) => {
+export const configureStore = ({ preloadedState, history }) => {
+    const middlewares = [thunk.withExtraArgument({history})];
     return createStore(reducers, preloadedState, composeWithDevTools(applyMiddleware(...middlewares)))
 };
