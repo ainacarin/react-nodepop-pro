@@ -15,7 +15,11 @@ configureClient({ accessToken });
 const store = configureStore({
   preloadedState: {
     auth: !!accessToken,
-    adverts: []
+    adverts: [],
+    ui: {
+      loading: false,
+      error: ''
+    }
   },
 });
 

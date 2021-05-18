@@ -1,17 +1,15 @@
 
 /**
- * Format auth state
- * {
+ * Format adverts state
  *  adverts: [] 
- * }
  */
 
  import { types } from "../types/types";
 
- export const advertsReducer = ( state = {}, action ) => {
+ export const advertsReducer = ( state = [], action ) => {
  
      switch (action.type) {
-         case types.adverts_loaded:
+         case types.advertsLoaded:
              return [
                  ...action.payload
              ]

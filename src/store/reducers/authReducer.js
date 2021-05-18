@@ -1,14 +1,12 @@
 
 /**
  * Format auth state
- * {
  *  auth: boolean 
- * }
  */
 
 import { types } from "../types/types";
 
-export const authReducer = ( state = {}, action ) => {
+export const authReducer = ( state = false, action ) => {
 
     switch (action.type) {
         case types.login:
