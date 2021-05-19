@@ -4,6 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { advertsReducer } from './reducers/advertsReducer';
 import { uiReducer } from './reducers/uiReducer';
 import thunk from 'redux-thunk';
+import * as api from '../api';
 
 
 const reducers = combineReducers({
@@ -14,6 +15,6 @@ const reducers = combineReducers({
 
 
 export const configureStore = ({ preloadedState, history }) => {
-    const middlewares = [thunk.withExtraArgument({history})];
+    const middlewares = [thunk.withExtraArgument({ api, history })];
     return createStore(reducers, preloadedState, composeWithDevTools(applyMiddleware(...middlewares)))
 };

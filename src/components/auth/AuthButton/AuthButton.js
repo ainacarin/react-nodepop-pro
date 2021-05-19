@@ -4,21 +4,26 @@ import T from 'prop-types';
 import { ConfirmationButton } from '../../shared';
 import { logout } from '../../../api/auth';
 import { connect } from 'react-redux';
-import { authLogout } from '../../../store/actions/auth';
+import { authLogout, authLogoutAction } from '../../../store/actions/auth';
 import { getIsLogged } from '../../../store/selectors/auth';
 
-const AuthButton = ({ isLogged, onLogout:handleLogout }) => {
+const AuthButton = ({ isLogged, onLogout }) => {
+
+ 
   
-  const handleLogoutConfirm = async () => {
-    await logout();
-    handleLogout();
-  };
+  // const handleLogoutConfirm = async () => {
+  //   await logout();
+  //   handleLogout();
+  // };
+
+
+  
 
   console.log(isLogged);
   return isLogged ? (
     <ConfirmationButton
       confirmation="Are you sure?"
-      onConfirm={handleLogoutConfirm}
+      onConfirm={onLogout}
     >
       Logout
     </ConfirmationButton>
@@ -36,9 +41,8 @@ AuthButton.defaultProps = {
   isLogged: false,
 };
 
-
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onLogout: () => dispatch(authLogout()),
+  onLogout: () => dispatch(authLogoutAction()),
 });
 const mapStateToProps = (state, ownProps) => ({ isLogged: getIsLogged(state) });
 export default connect(mapStateToProps, mapDispatchToProps)(AuthButton);

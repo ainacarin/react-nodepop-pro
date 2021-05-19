@@ -1,13 +1,16 @@
 export const types = {
-    login: 'AUTH Login',
-    logout: 'AUTH Logout',
+    authLoginRequest: 'AUTH Login Request',
+    authLoginSuccess: 'AUTH Login Success',
+    authLoginError: 'AUTH Login Error',
+
+    authLogoutRequest: 'AUTH Logout Request',
+    authLogoutSuccess: 'AUTH Logout Success',
+    authLogoutError: 'AUTH Logout Error',
+
+    authLogout: 'AUTH Logout',
 
     advertsLoaded: 'ADVERTS Loaded',
 
-    uiSetError: 'UI Set Error',
-    uiRemoveError: 'UI Remove Error',
-
-    uiStartLoading: 'UI Start Loading',
-    uiStopLoading: 'UI Stop Loading',
+    uiResetError: 'UI Reset Error'
 
 }

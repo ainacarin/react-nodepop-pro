@@ -21,7 +21,7 @@ const store = configureStore({
     adverts: [],
     ui: {
       loading: false,
-      error: ''
+      error: null
     }
   },
   history

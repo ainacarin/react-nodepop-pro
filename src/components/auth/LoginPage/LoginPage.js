@@ -1,33 +1,29 @@
 import React from 'react';
 import T from 'prop-types';
 
-import usePromise from '../../../hooks/usePromise';
-import { login } from '../../../api/auth';
 import LoginForm from './LoginForm';
-import { useDispatch } from 'react-redux';
-import { authLogin } from '../../../store/actions/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { authLoginAction } from '../../../store/actions/auth';
+import { getUi } from '../../../store/selectors/ui';
+import { resetErrorAction } from '../../../store/actions/ui';
 
-function LoginPage({ location, history }) {
-  const { isPending: isLoading, error, execute, resetError } = usePromise();
+function LoginPage() {
+
   const dispatch = useDispatch();
+  const { error, loading } = useSelector(getUi);
 
   const handleSubmit = credentials => {
-    execute(login(credentials))
-      .then(() => {
-        // modify state auth
-        dispatch( authLogin() )
-      }
-      )
-      .then(() => {
-        const { from } = location.state || { from: { pathname: '/' } };
-        history.replace(from);
-      });
+
+    dispatch( authLoginAction(credentials) )
+
   };
+
+  const resetError = () => dispatch(resetErrorAction());
 
   return (
     <div>
       <LoginForm onSubmit={handleSubmit} />
-      {isLoading && <p>...login in nodepop</p>}
+      {loading && <p>...login in nodepop</p>}
       {error && (
         <div onClick={resetError} style={{ color: 'red' }}>
           {error.message}
