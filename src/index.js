@@ -18,7 +18,10 @@ const history = createBrowserHistory();
 const store = configureStore({
   preloadedState: {
     auth: !!accessToken,
-    adverts: [],
+    adverts: {
+      loaded: false,
+      data: []
+    },
     ui: {
       loading: false,
       error: null

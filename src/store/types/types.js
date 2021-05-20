@@ -9,7 +9,9 @@ export const types = {
 
     authLogout: 'AUTH Logout',
 
-    advertsLoaded: 'ADVERTS Loaded',
+    advertsLoadedRequest: 'ADVERTS Loaded Request',
+    advertsLoadedSuccess: 'ADVERTS Loaded Success',
+    advertsLoadedError: 'ADVERTS Loaded Error',
 
     uiResetError: 'UI Reset Error'
 
