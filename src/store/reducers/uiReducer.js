@@ -2,7 +2,7 @@ import { types } from "../types/types";
 
 const initialState = {
   loading: false,
-  error: null
+  error: null,
 };
 
 export const uiReducer = (state = initialState, action) => {
@@ -11,19 +11,20 @@ export const uiReducer = (state = initialState, action) => {
     case types.authLogoutRequest:
     case types.advertsLoadedRequest:
     case types.tagsLoadedRequest:
-      return { ...state, loading: true, error: null }
+      return { ...state, loading: true, error: null };
     case types.authLoginSuccess:
     case types.authLogoutSuccess:
     case types.advertsLoadedSuccess:
     case types.tagsLoadedSuccess:
-      return { ...state, loading: false, error: null }
+    case types.advertDetailSuccess:
+      return { ...state, loading: false, error: null };
     case types.authLoginError:
     case types.authLogoutError:
     case types.advertsLoadedError:
     case types.tagsLoadedError:
-      return {...state, loading: false, error: action.payload}
+      return { ...state, loading: false, error: action.payload };
     case types.uiResetError:
-      return {...state, error: null}
+      return { ...state, error: null };
     default:
       return state;
   }

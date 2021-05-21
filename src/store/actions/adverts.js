@@ -1,4 +1,4 @@
-import { getAdvertsLoaded } from "../selectors/adverts";
+import { getAdvertsLoaded, getAdvertState } from "../selectors/adverts";
 import { types } from "../types/types";
 
 export const advertsLoaded = (adverts) => {
@@ -71,3 +71,26 @@ export const advertCreateAction = (newAdvert) => {
   };
 };
 
+export const advertDetailSuccess = advert => {
+  return {
+    type: types.advertDetailSuccess,
+    payload: advert
+  };
+};
+
+export const advertDetailAction = advertId => {
+  return async function (dispatch, getState, { api, history }) {
+    const advertLoaded = getAdvertState(getState(), advertId);
+    if (advertLoaded) {
+      return;
+    }
+    // dispatch(advertDetailRequest());
+    try {
+      const advert = await api.adverts.getAdvert(advertId);
+      dispatch(advertDetailSuccess(advert));
+      return advert;
+    } catch (error) {
+      // dispatch(advertDetailError(error));
+    }
+  };
+};

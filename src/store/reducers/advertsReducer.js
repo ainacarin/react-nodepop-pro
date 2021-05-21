@@ -24,6 +24,7 @@
                  data: [...action.payload]
              }
         case types.advertCreatedSuccess:
+        case types.adevertDetailSuccess:
             return { ...state, loaded: false, data: [...state.data, action.payload] };
         case types.authLogoutSuccess:
             return {

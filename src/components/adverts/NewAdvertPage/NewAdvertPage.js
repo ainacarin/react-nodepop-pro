@@ -10,6 +10,11 @@ import { getUi } from '../../../store/selectors/ui';
 import { useDispatch, useSelector } from 'react-redux';
 import { advertCreateAction } from '../../../store/actions/adverts';
 
+const mapAdvert = ({ photo, ...advert }) => ({
+  ...advert,
+  photo: photo ? `${process.env.REACT_APP_API_BASE_URL}${photo}` : photo,
+});
+
 function NewAdvertPage() {
   // const { isPending: isLoading, error, execute } = usePromise(null);
 
@@ -25,6 +30,7 @@ function NewAdvertPage() {
 
   const handleSubmit = async newAdvert => {
     const advert = await dispatch(advertCreateAction(newAdvert));
+    console.log('newadvertpage created', advert)
     setCreatedAdvert(advert);
   }
 
@@ -33,6 +39,7 @@ function NewAdvertPage() {
   }
 
   if (createdAdvert) {
+    console.log('redirect')
     return <Redirect to={`/adverts/${createdAdvert.id}`} />;
   }
 

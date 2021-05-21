@@ -5,11 +5,14 @@ import Layout from '../../layout';
 import AdvertDetail from './AdvertDetail';
 import { getAdvert, deleteAdvert } from '../../../api/adverts';
 import usePromise from '../../../hooks/usePromise';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getAdvertState } from '../../../store/selectors/adverts';
+import { advertDetailAction } from '../../../store/actions/adverts';
 
 function AdvertPage() {
   const { advertId } = useParams();
+
+  console.log('on advert page advertid', advertId)
   const history = useHistory();
   // const { isPending: isLoading, error, execute, data: advert } = usePromise(
   const { isPending: isLoading, error, execute } = usePromise(
@@ -18,11 +21,15 @@ function AdvertPage() {
   );
   
   const advert = useSelector(getAdvertState(advertId));
+  const dispatch = useDispatch();
 
-  // console.log(advertSelector);
   // React.useEffect(() => {
   //   execute(getAdvert(advertId));
   // }, [advertId]);
+
+    React.useEffect(() => {
+      dispatch( advertDetailAction(advertId) );
+    })
 
   const handleDelete = () => {
     execute(deleteAdvert(advertId)).then(() => history.push('/'));
