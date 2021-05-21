@@ -13,6 +13,10 @@ export const types = {
     advertsLoadedSuccess: 'ADVERTS Loaded Success',
     advertsLoadedError: 'ADVERTS Loaded Error',
 
+    tagsLoadedRequest: 'TAGS Loaded Request',
+    tagsLoadedSuccess: 'TAGS Loaded Success',
+    tagsLoadedError: 'TAGS Loaded Error',
+
     uiResetError: 'UI Reset Error'
 
 }

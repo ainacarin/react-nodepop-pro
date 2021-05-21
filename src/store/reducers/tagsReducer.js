@@ -1,10 +1,10 @@
 
 /**
- * Format adverts state
- *  adverts: {
+ * Format tags state
+ *  tags: {
  *      loaded: false,
  *      data: []
- * } 
+ * }
  */
 
  import { types } from "../types/types";
@@ -14,10 +14,10 @@
      data: []
  };
 
- export const advertsReducer = ( state = initialState, action ) => {
+ export const tagsReducer = ( state = initialState, action ) => {
  
      switch (action.type) {
-         case types.advertsLoadedSuccess:
+         case types.tagsLoadedSuccess:
              return {
                  ...state, 
                  loaded: true,

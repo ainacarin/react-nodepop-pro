@@ -22,6 +22,10 @@ const store = configureStore({
       loaded: false,
       data: []
     },
+    tags: {
+      loaded: false,
+      data: []
+    },
     ui: {
       loading: false,
       error: null
