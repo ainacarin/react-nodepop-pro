@@ -41,3 +41,33 @@ export const advertsLoadAction = () => {
       }
     };
   };
+
+  export const advertCreatedRequest = () => ({
+    type: types.advertCreatedRequest
+});
+
+export const advertCreatedSuccess = advert => ({
+    type: types.advertCreatedSuccess,
+    payload: advert
+});
+
+
+export const advertCreatedError = error => ({
+    type: types.advertCreatedError,
+    payload: error
+});
+
+export const advertCreateAction = (newAdvert) => {
+  return async function (dispatch, getState, { api, history }) {
+    dispatch(advertCreatedRequest());
+    try {
+      const { id: advertId } = await api.adverts.createAdvert(newAdvert);
+      const createdAdvert = await api.adverts.getAdvert(advertId)
+      dispatch(advertCreatedSuccess(createdAdvert));
+      return createdAdvert;
+    } catch (error) {
+        dispatch(advertCreatedError(error));
+    }
+  };
+};
+
