@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Redirect, useParams, useHistory } from 'react-router-dom';
 
 import Layout from '../../layout';
@@ -19,8 +19,10 @@ function AdvertPage() {
 
     null
   );
-  
-  const advert = useSelector(getAdvertState(advertId));
+  const [ advert, setAdvert ] = useState(null);
+
+  // const advert = useSelector(getAdvertState(advertId));
+
   console.log('advert page', advert);
   const dispatch = useDispatch();
 
@@ -28,9 +30,16 @@ function AdvertPage() {
   //   execute(getAdvert(advertId));
   // }, [advertId]);
 
-    React.useEffect(() => {
-      dispatch( advertDetailAction(advertId) );
-    })
+  if(!advert){
+    console.log('!advert')
+    dispatch( advertDetailAction(advertId) )
+    .then(setAdvert);
+  }
+    // React.useEffect(() => {
+    //   console.log('advert page useEffect')
+    //   dispatch( advertDetailAction(advertId) )
+    //   .then(setAdvert);
+    // },[advertId])
 
   const handleDelete = () => {
     execute(deleteAdvert(advertId)).then(() => history.push('/'));
