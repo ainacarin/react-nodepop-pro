@@ -23,6 +23,12 @@
                  loaded: true,
                  data: [...action.payload]
              }
+        case types.advertDeleteSuccess:
+            return {
+                ...state,
+                loaded: false,
+                data: [...action.payload]
+            }
         case types.advertCreatedSuccess:
         case types.advertDetailSuccess:
             return { ...state, loaded: false, data: [...state.data, action.payload] };

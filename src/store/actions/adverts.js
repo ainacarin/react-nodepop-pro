@@ -1,4 +1,4 @@
-import { getAdvertDetail, getAdvertsLoaded, getAdvertState } from "../selectors/adverts";
+import { getAdvertDetail, getAdverts, getAdvertsLoaded, getAdvertState } from "../selectors/adverts";
 import { types } from "../types/types";
 
 export const advertsLoaded = (adverts) => {
@@ -109,3 +109,36 @@ export const advertDetailAction = advertId => {
   };
 };
 
+export const advertDeleteSuccess = adverts => {
+  return {
+    type: types.advertDeleteSuccess,
+    payload: adverts
+  };
+};
+
+export const advertDeleteRequest = () => ({
+  type: types.advertDeleteRequest
+});
+
+export const advertDeleteError = error => ({
+  type: types.advertDeleteError,
+  payload: error
+});
+
+export const advertDeleteAction = advertId => {
+  return async function (dispatch, getState, {api, history}) {
+    console.log('action advertDeleteAction advertId', advertId);
+    dispatch(advertDeleteRequest());
+    try {
+      const advertDeleted = await api.adverts.deleteAdvert(advertId);
+      console.log('action advertDeleteAction advertDeleted', advertDeleted)
+      const advertsState = getAdverts(getState());
+      const newAdvertsState = advertsState.filter(advert => advert.id !== advertId);
+      console.log('action advertDeleteAction newAdvertsState', newAdvertsState)
+      dispatch(advertDeleteSuccess(newAdvertsState));
+      history.push('/');
+    } catch (error) {
+      dispatch(advertDeleteError(error))
+    }
+  }
+}
