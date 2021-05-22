@@ -13,11 +13,12 @@ export const getTags = () => {
 };
 
 export const getAdverts = () => {
-  return client.get(`${advertsPath}`);
+  return client.get(`${advertsPath}`).then(ads => {return ads.map(mapAdvert)});
 };
 
 export const getAdvert = advertId => {
   return client.get(`${advertsPath}/${advertId}`).then(mapAdvert);
+  // return client.get(`${advertsPath}/${advertId}`);
 };
 
 export const deleteAdvert = advertId => {

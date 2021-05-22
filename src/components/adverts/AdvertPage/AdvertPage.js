@@ -21,6 +21,7 @@ function AdvertPage() {
   );
   
   const advert = useSelector(getAdvertState(advertId));
+  console.log('advert page', advert);
   const dispatch = useDispatch();
 
   // React.useEffect(() => {
