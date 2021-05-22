@@ -85,7 +85,7 @@ export const advertDetailAction = advertId => {
     console.log('action advertDetailAction advertLoaded', advertLoaded)
     if (advertLoaded) {
       console.log('action advertDetailAction advertLoaded if true', advertLoaded)
-      return advertLoaded;
+      return;
     }
     // dispatch(advertDetailRequest());
     try {

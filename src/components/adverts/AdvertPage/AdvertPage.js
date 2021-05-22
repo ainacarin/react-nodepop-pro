@@ -6,7 +6,7 @@ import AdvertDetail from './AdvertDetail';
 import { getAdvert, deleteAdvert } from '../../../api/adverts';
 import usePromise from '../../../hooks/usePromise';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAdvertState } from '../../../store/selectors/adverts';
+import { getAdvertDetail, getAdvertState } from '../../../store/selectors/adverts';
 import { advertDetailAction } from '../../../store/actions/adverts';
 
 function AdvertPage() {
@@ -19,28 +19,32 @@ function AdvertPage() {
 
     null
   );
-  const [ advert, setAdvert ] = useState(null);
-
-  // const advert = useSelector(getAdvertState(advertId));
-
-  console.log('advert page', advert);
   const dispatch = useDispatch();
-
-  // React.useEffect(() => {
-  //   execute(getAdvert(advertId));
-  // }, [advertId]);
-
-  if(!advert){
-    console.log('!advert')
-    dispatch( advertDetailAction(advertId) )
-    .then(setAdvert);
-  }
-    // React.useEffect(() => {
-    //   console.log('advert page useEffect')
+  
+  /** option A */
+  // const [ advert, setAdvert ] = useState(null);
+  
+  // if(!advert){
+    //   console.log('!advert')
     //   dispatch( advertDetailAction(advertId) )
     //   .then(setAdvert);
-    // },[advertId])
+    // }
+    
+    /**option b */
+    const advert = useSelector(getAdvertState(advertId));
+    console.log('advert page', advert);
+  
+  React.useEffect(() => {
+      console.log('advert page useEffect')
+      dispatch( advertDetailAction(advertId) )
+    },[advertId]);
 
+ /** initial without redux */
+    // React.useEffect(() => {
+    //   execute(getAdvert(advertId));
+    // }, [advertId]);
+
+    /** common */
   const handleDelete = () => {
     execute(deleteAdvert(advertId)).then(() => history.push('/'));
   };
