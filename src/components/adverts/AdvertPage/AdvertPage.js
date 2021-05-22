@@ -8,6 +8,7 @@ import usePromise from '../../../hooks/usePromise';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdvertDetail, getAdvertState } from '../../../store/selectors/adverts';
 import { advertDetailAction } from '../../../store/actions/adverts';
+import { getUi } from '../../../store/selectors/ui';
 
 function AdvertPage() {
   const { advertId } = useParams();
@@ -20,7 +21,8 @@ function AdvertPage() {
     null
   );
   const dispatch = useDispatch();
-  
+  const { error:errorS, loading } = useSelector(getUi);
+
   /** option A */
   // const [ advert, setAdvert ] = useState(null);
   
@@ -49,11 +51,11 @@ function AdvertPage() {
     execute(deleteAdvert(advertId)).then(() => history.push('/'));
   };
 
-  if (error?.statusCode === 401) {
+  if (errorS?.statusCode === 401) {
     return <Redirect to="/login" />;
   }
 
-  if (error?.statusCode === 404) {
+  if (errorS?.statusCode === 404) {
     return <Redirect to="/404" />;
   }
 
@@ -62,7 +64,16 @@ function AdvertPage() {
   // console.log(advert)
   return (
     <Layout>
-      {advert && <AdvertDetail {...advert} onDelete={handleDelete} />}
+      {loading && <div> Cargando anuncio... </div>}
+      {errorS && (
+        <div
+          // onClick={resetError}
+          style={{ color: "red" }}
+        >
+          {errorS.message}
+        </div>
+      )}
+      {!loading && !errorS && advert && <AdvertDetail {...advert} onDelete={handleDelete} />}
     </Layout>
   );
 }

@@ -21,7 +21,9 @@ export const types = {
     advertCreatedSuccess: 'ADVERT Created Success',
     advertCreatedError: 'ADVERT Created Error',
 
+    advertDetailRequest: 'ADVERT Detail Request',
     advertDetailSuccess: 'ADVERT Detail Success',
+    advertDetailError: 'ADVERT Detail Error',
 
     uiResetError: 'UI Reset Error'
 

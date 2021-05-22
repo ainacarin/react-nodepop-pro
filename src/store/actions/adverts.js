@@ -78,6 +78,15 @@ export const advertDetailSuccess = advert => {
   };
 };
 
+export const advertDetailRequest = () => ({
+  type: types.advertDetailRequest
+});
+
+export const advertDetailError = error => ({
+  type: types.advertDetailError,
+  payload: error
+});
+
 export const advertDetailAction = advertId => {
   return async function (dispatch, getState, { api, history }) {
     console.log('action advertDetailAction advertId', advertId)
@@ -87,7 +96,7 @@ export const advertDetailAction = advertId => {
       console.log('action advertDetailAction advertLoaded if true', advertLoaded)
       return;
     }
-    // dispatch(advertDetailRequest());
+    dispatch(advertDetailRequest());
     try {
       console.log('action advertDetailAction try')
       const advert = await api.adverts.getAdvert(advertId);
@@ -95,8 +104,8 @@ export const advertDetailAction = advertId => {
       dispatch(advertDetailSuccess(advert));
       return advert;
     } catch (error) {
-      // dispatch(advertDetailError(error));
-      // return;
+      dispatch(advertDetailError(error));
     }
   };
 };
+

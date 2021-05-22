@@ -11,6 +11,7 @@ export const uiReducer = (state = initialState, action) => {
     case types.authLogoutRequest:
     case types.advertsLoadedRequest:
     case types.tagsLoadedRequest:
+    case types.advertDetailRequest:
       return { ...state, loading: true, error: null };
     case types.authLoginSuccess:
     case types.authLogoutSuccess:
@@ -22,6 +23,7 @@ export const uiReducer = (state = initialState, action) => {
     case types.authLogoutError:
     case types.advertsLoadedError:
     case types.tagsLoadedError:
+    case types.advertDetailError:
       return { ...state, loading: false, error: action.payload };
     case types.uiResetError:
       return { ...state, error: null };
