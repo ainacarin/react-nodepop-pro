@@ -15,11 +15,11 @@ function AdvertPage() {
 
   console.log('on advert page advertid', advertId)
   const history = useHistory();
-  // const { isPending: isLoading, error, execute, data: advert } = usePromise(
-  const { isPending: isLoading, error, execute } = usePromise(
+ // // const { isPending: isLoading, error, execute, data: advert } = usePromise(
+  // const { isPending: isLoading, error, execute } = usePromise(
 
-    null
-  );
+  //   null
+  // );
   const dispatch = useDispatch();
   const { error:errorS, loading } = useSelector(getUi);
 
