@@ -14,6 +14,11 @@ describe("Test LoginForm", () => {
     expect(wrapper.exists()).toBe(true);
   });
 
+  test("should generate snapshot", () => {
+    const wrapper = render();
+    expect(wrapper).toMatchSnapshot();
+  });
+
   test("should submit credentials", () => {
     const credentials = {
         email: 'email@example.com',
@@ -46,7 +51,7 @@ describe("Test LoginForm", () => {
     form.simulate("submit", { preventDefault() {} });
 
     expect(wrapper.find('button').props().disabled).toBe(false);
-    
+
     expect(props.onSubmit).toHaveBeenCalledWith(credentials);
   });
 });
