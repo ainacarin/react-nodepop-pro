@@ -7,7 +7,6 @@ const PrivateRoute = props => {
 
   const location = useLocation();
 
-  console.log('on private route', isLogged);
   return isLogged ? (
     <Route {...props} />
   ) : (
