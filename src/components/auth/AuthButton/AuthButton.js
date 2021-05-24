@@ -9,17 +9,7 @@ import { getIsLogged } from '../../../store/selectors/auth';
 
 const AuthButton = ({ isLogged, onLogout }) => {
 
- 
-  
-  // const handleLogoutConfirm = async () => {
-  //   await logout();
-  //   handleLogout();
-  // };
 
-
-  
-
-  console.log(isLogged);
   return isLogged ? (
     <ConfirmationButton
       confirmation="Are you sure?"
