@@ -26,9 +26,7 @@ function AdvertsPage() {
     
     const resetError = () => dispatch(resetErrorAction());
 
-    console.log('isloading',loading);
   React.useEffect(() => {
-    console.log('useEffect');
     dispatch( advertsLoadAction() );
  
   }, []);
@@ -41,10 +39,8 @@ function AdvertsPage() {
     return <Redirect to="/login" />;
   }
 
-  console.log('renderizes adverts page')
   const filteredAdverts = filterAdverts(adverts, filters);
 
-  console.log(filteredAdverts)
   return (
     <Layout>
       {adverts.length > 0 && (

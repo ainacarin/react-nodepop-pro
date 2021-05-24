@@ -15,41 +15,19 @@ function AdvertPage() {
 
   console.log('on advert page advertid', advertId)
   const history = useHistory();
- // // const { isPending: isLoading, error, execute, data: advert } = usePromise(
-  // const { isPending: isLoading, error, execute } = usePromise(
 
-  //   null
-  // );
   const dispatch = useDispatch();
   const { error:errorS, loading } = useSelector(getUi);
 
-  /** option A */
-  // const [ advert, setAdvert ] = useState(null);
-  
-  // if(!advert){
-    //   console.log('!advert')
-    //   dispatch( advertDetailAction(advertId) )
-    //   .then(setAdvert);
-    // }
-    
-    /**option b */
+
     const advert = useSelector(getAdvertState(advertId));
-    console.log('advert page', advert);
   
   React.useEffect(() => {
-      console.log('advert page useEffect')
       dispatch( advertDetailAction(advertId) )
     },[advertId]);
 
- /** initial without redux */
-    // React.useEffect(() => {
-    //   execute(getAdvert(advertId));
-    // }, [advertId]);
-
-    /** common */
+ 
   const handleDelete = () => {
-    // execute(deleteAdvert(advertId)).then(() => history.push('/'));
-    console.log('advert page delete action');
     dispatch( advertDeleteAction(advertId) )
   };
 
@@ -61,9 +39,7 @@ function AdvertPage() {
     return <Redirect to="/404" />;
   }
 
-  // console.log('advert page')
 
-  // console.log(advert)
   return (
     <Layout>
       {loading && <div> Cargando anuncio... </div>}
