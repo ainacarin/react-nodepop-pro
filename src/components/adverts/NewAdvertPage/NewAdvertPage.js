@@ -16,13 +16,6 @@ const mapAdvert = ({ photo, ...advert }) => ({
 });
 
 function NewAdvertPage() {
-  // const { isPending: isLoading, error, execute } = usePromise(null);
-
-  // const handleSubmit = newAdvert => {
-  //   execute(createAdvert(newAdvert)).then(({ id }) =>
-  //     history.push(`/adverts/${id}`)
-  //   );
-  // };
 
   const [createdAdvert, setCreatedAdvert] = React.useState(null);
   const dispatch = useDispatch();
@@ -30,7 +23,6 @@ function NewAdvertPage() {
 
   const handleSubmit = async newAdvert => {
     const advert = await dispatch(advertCreateAction(newAdvert));
-    console.log('newadvertpage created', advert)
     setCreatedAdvert(advert);
   }
 
@@ -39,7 +31,6 @@ function NewAdvertPage() {
   }
 
   if (createdAdvert) {
-    console.log('redirect')
     return <Redirect to={`/adverts/${createdAdvert.id}`} />;
   }
 
@@ -58,10 +49,5 @@ function NewAdvertPage() {
   );
 }
 
-// NewAdvertPage.propTypes = {
-//   history: T.shape({
-//     push: T.func.isRequired,
-//   }).isRequired,
-// };
 
 export default NewAdvertPage;
