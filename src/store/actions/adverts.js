@@ -34,7 +34,6 @@ export const advertsLoadAction = () => {
       dispatch(advertsLoadedRequest());
       try {
         const adverts = await api.adverts.getAdverts();
-        console.log('adverts getapi', adverts);
         dispatch(advertsLoadedSuccess(adverts));
       } catch (error) {
         dispatch(advertsLoadedError(error));
@@ -89,18 +88,13 @@ export const advertDetailError = error => ({
 
 export const advertDetailAction = advertId => {
   return async function (dispatch, getState, { api, history }) {
-    console.log('action advertDetailAction advertId', advertId)
     const advertLoaded = getAdvertDetail(getState(), advertId);
-    console.log('action advertDetailAction advertLoaded', advertLoaded)
     if (advertLoaded) {
-      console.log('action advertDetailAction advertLoaded if true', advertLoaded)
       return;
     }
     dispatch(advertDetailRequest());
     try {
-      console.log('action advertDetailAction try')
       const advert = await api.adverts.getAdvert(advertId);
-    console.log('action advertDetailAction advert', advert)
       dispatch(advertDetailSuccess(advert));
       return advert;
     } catch (error) {
@@ -127,14 +121,11 @@ export const advertDeleteError = error => ({
 
 export const advertDeleteAction = advertId => {
   return async function (dispatch, getState, {api, history}) {
-    console.log('action advertDeleteAction advertId', advertId);
     dispatch(advertDeleteRequest());
     try {
       const advertDeleted = await api.adverts.deleteAdvert(advertId);
-      console.log('action advertDeleteAction advertDeleted', advertDeleted)
       const advertsState = getAdverts(getState());
       const newAdvertsState = advertsState.filter(advert => advert.id !== advertId);
-      console.log('action advertDeleteAction newAdvertsState', newAdvertsState)
       dispatch(advertDeleteSuccess(newAdvertsState));
       history.push('/');
     } catch (error) {
