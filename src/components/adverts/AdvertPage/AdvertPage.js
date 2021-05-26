@@ -13,7 +13,6 @@ import { getUi } from '../../../store/selectors/ui';
 function AdvertPage() {
   const { advertId } = useParams();
 
-  console.log('on advert page advertid', advertId)
   const history = useHistory();
 
   const dispatch = useDispatch();

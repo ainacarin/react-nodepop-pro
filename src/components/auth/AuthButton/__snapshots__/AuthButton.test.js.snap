@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthButtonTest snapshot testing 1`] = `
+<ConfirmationButton
+  confirmation="Are you sure?"
+  onConfirm={[MockFunction]}
+>
+  Logout
+</ConfirmationButton>
+`;

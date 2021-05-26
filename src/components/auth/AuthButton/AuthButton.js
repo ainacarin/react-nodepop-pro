@@ -36,3 +36,5 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 const mapStateToProps = (state, ownProps) => ({ isLogged: getIsLogged(state) });
 export default connect(mapStateToProps, mapDispatchToProps)(AuthButton);
+
+export const AuthButtonTest = AuthButton;
