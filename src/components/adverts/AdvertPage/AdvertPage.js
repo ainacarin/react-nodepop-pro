@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
-import { Redirect, useParams, useHistory } from 'react-router-dom';
+import React from 'react';
+import { Redirect, useParams } from 'react-router-dom';
 
 import Layout from '../../layout';
 import AdvertDetail from './AdvertDetail';
-import { getAdvert, deleteAdvert } from '../../../api/adverts';
-import usePromise from '../../../hooks/usePromise';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAdvertDetail, getAdvertState } from '../../../store/selectors/adverts';
+import { getAdvertState } from '../../../store/selectors/adverts';
 import { advertDeleteAction, advertDetailAction } from '../../../store/actions/adverts';
 import { getUi } from '../../../store/selectors/ui';
 
 function AdvertPage() {
   const { advertId } = useParams();
-
-  const history = useHistory();
 
   const dispatch = useDispatch();
   const { error:errorS, loading } = useSelector(getUi);
@@ -23,7 +19,7 @@ function AdvertPage() {
   
   React.useEffect(() => {
       dispatch( advertDetailAction(advertId) )
-    },[advertId]);
+    },[advertId, dispatch]);
 
  
   const handleDelete = () => {
