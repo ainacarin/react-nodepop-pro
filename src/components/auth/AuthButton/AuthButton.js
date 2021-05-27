@@ -2,9 +2,8 @@ import { Link } from 'react-router-dom';
 import T from 'prop-types';
 
 import { ConfirmationButton } from '../../shared';
-import { logout } from '../../../api/auth';
 import { connect } from 'react-redux';
-import { authLogout, authLogoutAction } from '../../../store/actions/auth';
+import { authLogoutAction } from '../../../store/actions/auth';
 import { getIsLogged } from '../../../store/selectors/auth';
 
 const AuthButton = ({ isLogged, onLogout }) => {
