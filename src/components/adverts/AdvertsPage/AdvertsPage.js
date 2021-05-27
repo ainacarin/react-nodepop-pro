@@ -29,7 +29,7 @@ function AdvertsPage() {
   React.useEffect(() => {
     dispatch( advertsLoadAction() );
  
-  }, []);
+  }, [dispatch]);
 
   React.useEffect(() => {
     saveFilters(filters);
