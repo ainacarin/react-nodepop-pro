@@ -1,37 +1,52 @@
 import React from 'react';
-import { Redirect, useParams, useHistory } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 
 import Layout from '../../layout';
 import AdvertDetail from './AdvertDetail';
-import { getAdvert, deleteAdvert } from '../../../api/adverts';
-import usePromise from '../../../hooks/usePromise';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAdvertState } from '../../../store/selectors/adverts';
+import { advertDeleteAction, advertDetailAction } from '../../../store/actions/adverts';
+import { getUi } from '../../../store/selectors/ui';
 
 function AdvertPage() {
   const { advertId } = useParams();
-  const history = useHistory();
-  const { isPending: isLoading, error, execute, data: advert } = usePromise(
-    null
-  );
 
+  const dispatch = useDispatch();
+  const { error:errorS, loading } = useSelector(getUi);
+
+
+    const advert = useSelector(getAdvertState(advertId));
+  
   React.useEffect(() => {
-    execute(getAdvert(advertId));
-  }, [advertId]);
+      dispatch( advertDetailAction(advertId) )
+    },[advertId, dispatch]);
 
+ 
   const handleDelete = () => {
-    execute(deleteAdvert(advertId)).then(() => history.push('/'));
+    dispatch( advertDeleteAction(advertId) )
   };
 
-  if (error?.statusCode === 401) {
+  if (errorS?.statusCode === 401) {
     return <Redirect to="/login" />;
   }
 
-  if (error?.statusCode === 404) {
+  if (errorS?.statusCode === 404) {
     return <Redirect to="/404" />;
   }
 
+
   return (
     <Layout>
-      {advert && <AdvertDetail {...advert} onDelete={handleDelete} />}
+      {loading && <div> Cargando anuncio... </div>}
+      {errorS && (
+        <div
+          // onClick={resetError}
+          style={{ color: "red" }}
+        >
+          {errorS.message}
+        </div>
+      )}
+      {!loading && !errorS && advert && <AdvertDetail {...advert} onDelete={handleDelete} />}
     </Layout>
   );
 }

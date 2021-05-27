@@ -1,28 +1,29 @@
 import React from 'react';
 import T from 'prop-types';
 
-import { useAuthContext } from '../context';
-import usePromise from '../../../hooks/usePromise';
-import { login } from '../../../api/auth';
 import LoginForm from './LoginForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { authLoginAction } from '../../../store/actions/auth';
+import { getUi } from '../../../store/selectors/ui';
+import { resetErrorAction } from '../../../store/actions/ui';
 
-function LoginPage({ location, history }) {
-  const { handleLogin } = useAuthContext();
-  const { isPending: isLoading, error, execute, resetError } = usePromise();
+function LoginPage() {
+
+  const dispatch = useDispatch();
+  const { error, loading } = useSelector(getUi);
 
   const handleSubmit = credentials => {
-    execute(login(credentials))
-      .then(handleLogin)
-      .then(() => {
-        const { from } = location.state || { from: { pathname: '/' } };
-        history.replace(from);
-      });
+
+    dispatch( authLoginAction(credentials) )
+
   };
+
+  const resetError = () => dispatch(resetErrorAction());
 
   return (
     <div>
       <LoginForm onSubmit={handleSubmit} />
-      {isLoading && <p>...login in nodepop</p>}
+      {loading && <p>...login in nodepop</p>}
       {error && (
         <div onClick={resetError} style={{ color: 'red' }}>
           {error.message}
