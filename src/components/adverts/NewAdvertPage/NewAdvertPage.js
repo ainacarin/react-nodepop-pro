@@ -1,19 +1,11 @@
 import React from 'react';
-import T from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
-import { createAdvert } from '../../../api/adverts';
-import usePromise from '../../../hooks/usePromise';
 import Layout from '../../layout';
 import NewAdvertForm from './NewAdvertForm';
 import { getUi } from '../../../store/selectors/ui';
 import { useDispatch, useSelector } from 'react-redux';
 import { advertCreateAction } from '../../../store/actions/adverts';
-
-const mapAdvert = ({ photo, ...advert }) => ({
-  ...advert,
-  photo: photo ? `${process.env.REACT_APP_API_BASE_URL}${photo}` : photo,
-});
 
 function NewAdvertPage() {
 
