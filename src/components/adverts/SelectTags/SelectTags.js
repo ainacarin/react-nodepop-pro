@@ -14,7 +14,7 @@ function SelectTags(props) {
 
   React.useEffect(() => {
     dispatch(tagsLoadAction());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
